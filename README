@@ -1,0 +1,8 @@
+This is the code for an Arduino controlling one wireless power supply via a hijacked remote. 
+In addition it controls a stepper motor and a 2x20 LCD display.
+
+Since I use it in German, every string which is printed on the LCD or via serial is in German.
+The English translation could be found in the given comments.
+I can guarantee for nothing - this is my first Hardware project ;-)
+
+Clear documentation, schematic and assembly tutorial coming soon
