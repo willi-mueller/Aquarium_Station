@@ -1,3 +1,5 @@
+
+
 /* Author: Willi Müller
 License: Creative Commons Attribution-Noncommercial 3.0 Germany License 
 This is the code for an Arduino controlling one wireless power supply via a hijacked remote. 
@@ -8,24 +10,25 @@ The English translation could be found in the given comments.
 I can guarantee for nothing - this is my first Hardware project ;-)
 */
 
-#include <LiquidCrystal.h>
+#include <ShiftLCD.h>
+//#include <LiquidCrystal.h>
 
-int sensorInputPin = 1;
-int sensorPowerPin = 8;
-int offPin =  13;
-int onPin = 12;
-LiquidCrystal lcd(7, 11, 10, 5, 4, 3, 2);
+int sensorInputPin = 0;
+int offPin =  12;
+int onPin = 13;
+ShiftLCD lcd(6,3,5);
+//LiquidCrystal lcd(7,11,10,5,4,3,2);
 int motorPin1 = 9;
-int motorPin2 = 6;
+int motorPin2 = 8;
 int motorDelay = 50;
 int sensorValue = 0;
 int end=50; //number of measured temperature values
-unsigned long timeStart=38100000; //insert current time in ms
+unsigned long timeStart=38280000; //insert current time in ms
 unsigned long time=0;
 int hoursFeed=10, minutesFeed=40;	//insert feeding time
 int hours = 0, minutes = 0, seconds = 0, milliseconds = 0;
 float temp=0;    //current temperature
-float tempOpt=0, tempDay=20, tempNight=20;	
+float tempOpt=0, tempDay=21, tempNight=21;	
 float span=1;    //span between tempMin und tempMax
 float tempMax, tempMin;
 int requests=0;
@@ -36,7 +39,6 @@ void setup()
 {
   pinMode(onPin, OUTPUT);  
   pinMode(offPin, OUTPUT); 
-  pinMode(sensorPowerPin, OUTPUT);
   pinMode(motorPin1, OUTPUT);
   pinMode(motorPin2, OUTPUT);
   analogReference (INTERNAL);
@@ -75,7 +77,7 @@ void time_calc () {
 }
 
 int measure () {
-  digitalWrite(sensorPowerPin, HIGH);
+  //digitalWrite(sensorPowerPin, HIGH);
   for (int i=0; i<end; i++) {
     sensorValue += analogRead(sensorInputPin);
   }
@@ -148,9 +150,8 @@ void startup() {
 }
 
 void loop () {
-	int state = 0;
-	startup();
-
+  int state = 0;
+  startup();
   while (1<2) {
     delay(1000);
     measure();
