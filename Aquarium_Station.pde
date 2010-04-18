@@ -19,12 +19,13 @@ I can guarantee for nothing - this is my first Hardware project ;-)
 
 #include <ShiftLCD.h>
 /*Thanks to Chris Parish for this Library available at http://cjparish.blogspot.com/2010/01/controlling-lcd-display-with-shift.html*/
-
+//#include <LiquidCrystal.h>
 
 int sensorInputPin = 0;
 int offPin =  12;
 int onPin = 13;
 ShiftLCD lcd(6,3,5);
+//LiquidCrystal lcd(7,11,10,5,4,3,2); //in case of no shift register/wenn ohne Schieberegister 
 int motorPin1 = 9;
 int motorPin2 = 8;
 int motorDelay = 50;
@@ -32,12 +33,12 @@ int sensorValue = 0;
 int end=50; //number of measured temperature values
 unsigned long timeStart=129600000 ; //insert current time in ms
 unsigned long time=0;
-int hoursFeed=16, minutesFeed=25;	//insert feeding time
 int hours = 0, minutes = 0, seconds = 0, milliseconds = 0;
+int hoursFeed=16, minutesFeed=25;	//insert feeding time
 float temp=0;    //current temperature
+float span=1;    //span between tempMin und tempMax
 float tempOpt=0, tempDay=23, tempNight=21;	
 float tempMax, tempMin;
-float span=1;    //span between tempMin und tempMax
 int requests=0;
 int mode=0; //0=>'day', 1=>'night'
 
