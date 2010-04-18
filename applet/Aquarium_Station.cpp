@@ -11,8 +11,7 @@ I can guarantee for nothing - this is my first Hardware project ;-)
 */
 
 #include <ShiftLCD.h>
-/*Thanks to Chris Parish for this Library available at http://cjparish.blogspot.com/2010/01/controlling-lcd-display-with-shift.html*/
-
+//#include <LiquidCrystal.h>
 
 #include "WProgram.h"
 void setup();
@@ -28,20 +27,22 @@ void day_night();
 void startup();
 void loop ();
 int sensorInputPin = 0;
+//int sensorPowerPin = 8;
 int offPin =  12;
 int onPin = 13;
 ShiftLCD lcd(6,3,5);
+//LiquidCrystal lcd(7,11,10,5,4,3,2);
 int motorPin1 = 9;
 int motorPin2 = 8;
 int motorDelay = 50;
 int sensorValue = 0;
 int end=50; //number of measured temperature values
-unsigned long timeStart=129600000 ; //insert current time in ms
+unsigned long timeStart=38280000; //insert current time in ms
 unsigned long time=0;
-int hoursFeed=16, minutesFeed=25;	//insert feeding time
+int hoursFeed=10, minutesFeed=40;	//insert feeding time
 int hours = 0, minutes = 0, seconds = 0, milliseconds = 0;
 float temp=0;    //current temperature
-float tempOpt=0, tempDay=23, tempNight=23;	
+float tempOpt=0, tempDay=21, tempNight=21;	
 float span=1;    //span between tempMin und tempMax
 float tempMax, tempMin;
 int requests=0;
@@ -52,6 +53,7 @@ void setup()
 {
   pinMode(onPin, OUTPUT);  
   pinMode(offPin, OUTPUT); 
+  //pinMode(sensorPowerPin, OUTPUT);
   pinMode(motorPin1, OUTPUT);
   pinMode(motorPin2, OUTPUT);
   analogReference (INTERNAL);
@@ -90,6 +92,7 @@ void time_calc () {
 }
 
 int measure () {
+  //digitalWrite(sensorPowerPin, HIGH);
   for (int i=0; i<end; i++) {
     sensorValue += analogRead(sensorInputPin);
   }

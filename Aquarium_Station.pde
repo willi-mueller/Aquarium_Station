@@ -2,48 +2,41 @@
 
 /* Author: Willi Müller
 License: Creative Commons Attribution-Noncommercial 3.0 Germany License 
-
-
-Dies ist der Code für eine Aquarium-Station auf Basis eines Arduino. Sie misst die Temperatur im Aquarium und schaltet über eine Funksteckdose z.B. die Heizung. 
-Außerdem gehört auch noch eine automatische Fütterungs-Anlage (Schrittmotor) und ein Display zur Station.
-
-Eine Anleitung zum Nachbauen bzw. eine Dokumentation der Hardware ist im Wiki (http://wiki.github.com/jups23/Aquarium_Station/) zu finden.
-Hinweis: Elektrischer Strom kann gefährlich sein! Ich kann nicht garantieren, dass Code und Schaltungen einwandfrei funktionieren – es ist mein erstes Projekt ;-)
-
 This is the code for an Arduino controlling one wireless power supply via a hijacked remote. 
-In addition it controls a stepper motor and a 2x20 LCD display. 
+In addition it controls a stepper motor and a 2x20 LCD display.
+
 Since I use it in German, every string which is printed on the LCD or via serial is in German.
-The English translation could be found in the given comments. A clear assembly tutorial in English is in the works.
+The English translation could be found in the given comments.
 I can guarantee for nothing - this is my first Hardware project ;-)
 */
 
 #include <ShiftLCD.h>
-/*Thanks to Chris Parish for this Library available at http://cjparish.blogspot.com/2010/01/controlling-lcd-display-with-shift.html*/
 //#include <LiquidCrystal.h>
 
 int sensorInputPin = 0;
 int offPin =  12;
 int onPin = 13;
 ShiftLCD lcd(6,3,5);
-//LiquidCrystal lcd(7,11,10,5,4,3,2); //in case of no shift register/wenn ohne Schieberegister 
+//LiquidCrystal lcd(7,11,10,5,4,3,2);
 int motorPin1 = 9;
 int motorPin2 = 8;
 int motorDelay = 50;
 int sensorValue = 0;
 int end=50; //number of measured temperature values
-unsigned long timeStart=129600000 ; //insert current time in ms
+unsigned long timeStart=38280000; //insert current time in ms
 unsigned long time=0;
+int hoursFeed=10, minutesFeed=40;	//insert feeding time
 int hours = 0, minutes = 0, seconds = 0, milliseconds = 0;
-int hoursFeed=16, minutesFeed=25;	//insert feeding time
 float temp=0;    //current temperature
+float tempOpt=0, tempDay=21, tempNight=21;	
 float span=1;    //span between tempMin und tempMax
-float tempOpt=0, tempDay=23, tempNight=21;	
 float tempMax, tempMin;
 int requests=0;
 int mode=0; //0=>'day', 1=>'night'
 
 
-void setup() {
+void setup()
+{
   pinMode(onPin, OUTPUT);  
   pinMode(offPin, OUTPUT); 
   pinMode(motorPin1, OUTPUT);
@@ -84,7 +77,10 @@ void time_calc () {
 }
 
 int measure () {
-  for (int i=0; i<end; i++) {sensorValue += analogRead(sensorInputPin); }
+  //digitalWrite(sensorPowerPin, HIGH);
+  for (int i=0; i<end; i++) {
+    sensorValue += analogRead(sensorInputPin);
+  }
   sensorValue/=end;
 } 
 
@@ -148,7 +144,7 @@ void startup() {
   lcd.print(" Spanne:"); lcd.print(span); //en: Span:
   delay(3000);
   lcd.clear();
-  Serial.print("Futter "); Serial.print(hoursFeed); Serial.print(":"); Serial.println(minutesFeed);	//En: Feeding
+	Serial.print("Futter "); Serial.print(hoursFeed); Serial.print(":"); Serial.println(minutesFeed);	//En: Feeding
   turn_on();
   delay(2000); // to protect remote and receiver
 }
