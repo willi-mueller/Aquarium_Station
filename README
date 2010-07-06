@@ -1,14 +1,28 @@
-License: Creative Commons Attribution-Noncommercial 3.0 Germany License 
-Author: Willi Müller
+/* Author: Willi Müller License: Do what you want with it, just please mention my
+name and notify me
 
-Dies ist der Code für eine Aquarium-Station auf Basis eines Arduino. Sie misst die Temperatur im Aquarium und schaltet über eine Funksteckdose z.B. die Heizung. 
-Außerdem gehört auch noch eine automatische Fütterungs-Anlage (Schrittmotor) und ein Display zur Station.
+####--------Deutsch----------#### Dies ist der Code für eine Aquarium-Station auf
+Basis eines Arduino. Sie misst die Temperatur im Aquarium und schaltet über eine
+Funksteckdose z.B. die Heizung. Außerdem gehört auch noch eine automatische
+Fütterungs-Anlage (Schrittmotor) und ein Display zur Station.
 
-Eine Anleitung zum Nachbauen bzw. eine Dokumentation der Hardware ist im Wiki (http://wiki.github.com/jups23/Aquarium_Station/) zu finden.
-Hinweis: Elektrischer Strom kann gefährlich sein! Ich kann nicht garantieren, dass Code und Schaltungen einwandfrei funktionieren – es ist mein erstes Projekt ;-)
+ Eine Anleitung zum Nachbauen bzw. eine Dokumentation der Hardware ist im Wiki
+(http://wiki.github.com/jups23/Aquarium_Station/) zu finden. Hinweis: Elektrischer
+Strom kann gefährlich sein! Ich kann nicht garantieren, dass Code und Schaltungen
+einwandfrei funktionieren – es ist mein erstes Projekt ;-)
 
-This is the code for an Arduino controlling one wireless power supply via a hijacked remote. 
-In addition it controls a stepper motor and a 2x20 LCD display. 
-Since I use it in German, every string which is printed on the LCD or via serial is in German.
-The English translation could be found in the given comments. A clear assembly tutorial in English is in the works.
-I can guarantee for nothing - this is my first Hardware project ;-)
+####--------English----------#### This is the code for an Arduino controlling one
+wireless power supply via a hijacked remote. In addition it measures the
+temperature, controls a stepper motor and a 2x20 LCD display. It is used to
+control a fish tank. The temperature sensor is used to, well, measure the
+temperature, the heating is attached to the wireless power supply so the Arduino
+can turn it on and off. The steppert motor adds automatic feeding to this little
+station.
+
+Since I use it in German, every string which is printed on the LCD is in German.
+The English translation could be found in the given comments. A clear assembly
+tutorial in English is in the works. The schematic and a German tutorial could be
+found in the wiki of this project
+(http://wiki.github.com/jups23/Aquarium_Station/)
+
+I can guarantee for nothing - this is my first Hardware project ;-) */
